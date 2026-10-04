@@ -1,0 +1,426 @@
+@import "tailwindcss";
+@import "tailwindcss";
+
+@keyframes rotation {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+.logout-wrapper {
+  --rad: 32px;
+  --color-wrapper-border: #918888;
+  --color-btn-bg: #f00;
+  --color-btn-text: #000;
+  --color-btn-text-shadow: #fff;
+  --color-btn-inset-shadow: #558;
+  --color-layer-a: #fff;
+  --color-layer-b: #00f;
+  --color-overlay-text: #000;
+  --color-overlay-glow: #fff;
+  --color-overlay-shadow: #0004;
+  --color-overlay-highlight: #fff5;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border: 2px solid var(--color-wrapper-border);
+  border-radius: var(--rad);
+
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+
+  filter: saturate(0.65) brightness(1.8);
+}
+
+/* Main button */
+.logout-btn {
+  position: relative;
+  z-index: 0;
+
+  padding: 10px 28px;
+  border: none;
+  border-radius: var(--rad);
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+
+  letter-spacing: 0.15rem;
+
+  color: var(--color-btn-text);
+  background: var(--color-btn-bg);
+
+  box-shadow:
+    inset 0 0 10px 9px var(--color-btn-inset-shadow);
+
+  text-shadow: 0 1px 3px var(--color-btn-text-shadow);
+
+  cursor: pointer;
+
+  mix-blend-mode: color-dodge;
+
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+/* Rotating color layer */
+.logout-gradient-layer {
+  position: absolute;
+
+  pointer-events: none;
+
+  left: -160px;
+
+  width: 500%;
+  aspect-ratio: 1;
+
+  background: radial-gradient(
+    ellipse at 65% 180%,
+    var(--color-layer-a),
+    var(--color-layer-b),
+    var(--color-layer-a),
+    var(--color-layer-b),
+    var(--color-layer-a),
+    var(--color-layer-b),
+    var(--color-layer-a),
+    var(--color-layer-b),
+    var(--color-layer-a),
+    var(--color-layer-b),
+    var(--color-layer-a)
+  );
+
+  mix-blend-mode: difference;
+
+  animation: logoutRotate 8s linear infinite;
+}
+
+.logout-gradient-layer.second {
+  mix-blend-mode: color-dodge;
+}
+
+/* Text */
+.logout-text-overlay {
+  position: absolute;
+
+  pointer-events: none;
+  z-index: 2;
+
+  padding: 10px 28px;
+
+  border-radius: var(--rad);
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+
+  letter-spacing: 0.15rem;
+
+  color: var(--color-overlay-text);
+
+  text-shadow: 0 0 4px var(--color-overlay-glow);
+
+  box-shadow:
+    inset 0 -4px 4px 0 var(--color-overlay-shadow),
+    inset 0 4px 4px 0 var(--color-overlay-highlight);
+
+  mix-blend-mode: multiply;
+
+  transition: transform 0.3s ease;
+
+  animation: logoutOpacityPulse 5s ease infinite;
+}
+
+/* White moving light */
+.logout-light {
+  position: absolute;
+
+  pointer-events: none;
+  z-index: 1;
+
+  border-radius: 50px;
+
+  width: 80%;
+  height: 1.9rem;
+
+  background-color: #fff5;
+
+  filter: blur(5px);
+
+  animation: logoutPulse 3s ease-in-out infinite;
+}
+
+/* Hover */
+.logout-wrapper:hover .logout-text-overlay {
+  transform: scale(1.1);
+}
+
+.logout-wrapper:hover .logout-btn {
+  color: #0000;
+  text-shadow: 0 0 0 #0000;
+}
+
+/* Click */
+.logout-wrapper:active .logout-text-overlay {
+  transform: scale(0.95);
+}
+
+.logout-wrapper:active .logout-btn {
+  color: #0000;
+  text-shadow: 0 0 0 #0000;
+}
+
+/* Rotation */
+@keyframes logoutRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Light pulse */
+@keyframes logoutPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+}
+
+/* Text pulse */
+@keyframes logoutOpacityPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+
+
+
+
+
+
+/* TASK CARD */
+
+/* TASK CARD */
+
+
+.tasks-grid
+ { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;  }
+ /* TASK CARD */ 
+ .task-card
+  { display: flex; height: 150px; width: 185px; border-radius: 20px; 
+    background:black; transition: all 500ms ease-in; transition-delay: 1s;
+     margin: 20px auto; overflow: hidden; position: relative; border: 4px solid #374151; } 
+ /* Click button */ 
+ .task-card::before { content: "Click here to see Task Details";
+   position: absolute; left: 0; top: 0; height: 150px; width: 150px;
+    border-radius: 18px; display: flex; align-items: center; justify-content: center;
+     text-align: center; padding: 20px; box-sizing: border-box; color: #8c8d8f; 
+     /* DARK BLACK TEXT */ font-size: 16px; font-weight: 700; background:#39373769;
+      z-index: 5; transition: all 500ms ease-in; transition-delay: 1s; }
+  /* Hover par card expand */
+   .task-card:hover { width: 450px; /* 650px se kam */ background: black; border-color: #052668e5; transition: all 700ms ease-out; } 
+   /* Click box */ .task-card:hover::before { background: #4b5563; transition: all 700ms ease-out; } 
+   /* Task content */ .task-card-content { width: 100%; min-width: 0; padding-left: 170px; padding-right: 20px; opacity: 0; visibility: hidden; transition: all 450ms ease-in; } 
+   /* Hover par text show */
+    .task-card:hover .task-card-content { opacity: 1; visibility: visible; transition: all 700ms ease-out; transition-delay: 300ms;}
+
+
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+/* 768px - 1000px */
+@media (max-width: 1000px) {
+
+  .tasks-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .task-card:hover {
+    width: 400px;
+  }
+}
+
+
+/* 500px - 767px */
+@media (max-width: 767px) {
+
+  .tasks-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .task-card:hover {
+    width: 450px;
+    max-width: 95vw;
+  }
+}
+
+
+/* 350px - 499px */
+@media (max-width: 499px) {
+
+  .tasks-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .task-card {
+    width: 185px;
+  }
+
+  .task-card:hover {
+    width: 95vw;
+  }
+
+  .task-card-content {
+    padding-left: 165px;
+    padding-right: 15px;
+  }
+}
+
+
+/* 250px - 349px */
+@media (max-width: 349px) {
+
+  .tasks-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .task-card {
+    width: 170px;
+    height: 140px;
+  }
+
+  .task-card::before {
+    width: 140px;
+    height: 140px;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .task-card:hover {
+    width: 95vw;
+  }
+
+  .task-card-content {
+    padding-left: 150px;
+    padding-right: 10px;
+  }
+}
+
+
+
+
+
+
+
+.create-btn {
+  width: 10em;
+  position: relative;
+  height: 3.5em;
+  border: 3px ridge #149CEA;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.create-btn::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: #212121;
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.create-btn::before {
+
+
+.create-btn {
+  width: 10em;
+  position: relative;
+  height: 3.5em;
+  border: 3px ridge #149CEA;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+}
+.create-btn::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: #212121;
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.create-btn::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+  top: 80%;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: #212121;
+  transition: 0.5s;
+}
+
+.create-btn:hover::before,
+.create-btn:hover::after {
+  transform: scale(0);
+}
+
+.create-btn:hover {
+  box-shadow: inset 0px 0px 25px #1479EA;
+} 
+
+
+
+/* ================= CREATE BUTTON ================= */
+
